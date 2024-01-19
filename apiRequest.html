@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .card {
+      border: 1px solid #000000;
+      margin: 20px auto;
+      width: 280px;
+      height: 280px;
+      background-color: #ffffff;
+    }
+  </style>
+  <body style="background-color: #212121"></body>
+  <script>
+    const requestUrl = "https://api.github.com/users/HASSAN-TANOLI";
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", requestUrl);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        const data = JSON.parse(this.responseText);
+        console.log(data);
+        const userCard = document.createElement("div");
+
+        userCard.innerHTML = `
+       <img src = ${data.avatar_url} />
+       <h1> Name: ${data.login} </h1>
+       <h4> Followers: ${data.followers}  </h4>
+       <h4> Following: ${data.following} </h4>
+       <h4> Repositories: ${data.public_repos} </h4>
+
+       <style> 
+            div{
+                padding: 10px;
+                border: 1px solid #FFFFFF;
+                width: 280px;
+                height: auto;
+                background-color: #ffffff;
+                border-radius: 5px;
+            }
+
+            div img {
+                width: 200px;
+                height: auto;
+            }
+
+            div h1 {
+                font-size: 20px;
+                font-family: 'poppins';
+            }
+        <style/>
+       `;
+
+        // Append the div to the body or any other container element
+        document.body.appendChild(userCard);
+      }
+    };
+
+    xhr.send();
+  </script>
+</html>
